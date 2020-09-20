@@ -3,6 +3,7 @@ let snakeBody = new Array();
 let snakeHead = Math.floor(Math.random() * 100) + 1 ;
 let x;
 let endOfTail;
+let direction;
 
 // Use getElementsByClassName to find elements as HTMLcollection, then turn into array so we can use forEach to add a new class
 function displaySnakeHead() {
@@ -18,52 +19,59 @@ function clearHead() {
     x.forEach(element => element.classList.remove('snakehead'));
 }
 
+function stepUp() {
+    direction = "up";
+    snakeHead -= 10;
+    if (snakeHead < 1) {
+        snakeHead += 100;
+    }
+}
+
+function stepDown() {
+    direction = "down";
+    snakeHead += 10;
+    if (snakeHead > 100) {
+        snakeHead -= 100;
+    }
+}
+
+function stepLeft() {
+    direction = "left";
+    snakeHead -= 1;
+    if (snakeHead % 10 == 0) {
+        snakeHead += 10;
+    }
+}
+
+function stepRight() {
+    direction = "right";
+    snakeHead += 1;
+    if (snakeHead % 10 == 1) {
+        snakeHead -= 10;
+   }
+}
+
+function popSnakeBody() {
+    if (snakeBody.length > 1) {
+    endOfTail = snakeBody.pop();
+    }
+}
+
 function logKey(e) {
     clearHead();
     clearBody();
-    endOfTail = snakeBody.pop();
-     
-    // Up
-    if (e.keyCode == '38') {
-        snakeHead -= 10;
-        if (snakeHead < 1) {
-            snakeHead += 100;
-        }
-    }
-    // Down
-    else if (e.keyCode == '40') {
-        snakeHead += 10;
-        if (snakeHead > 100) {
-            snakeHead -= 100;
-        }
-    }
-    // Left
-    else if (e.keyCode == '37') {
-       snakeHead -= 1;
-       if (snakeHead % 10 == 0) {
-           snakeHead += 10;
-       }
-    }
-    // Right
-    else if (e.keyCode == '39') {
-       snakeHead += 1;
-       if (snakeHead % 10 == 1) {
-           snakeHead -= 10;
-      }
-    }
+    popSnakeBody();
+
+    if (e.keyCode == '38') { stepUp(); }
+    else if (e.keyCode == '40') { stepDown(); }
+    else if (e.keyCode == '37') { stepLeft(); }
+    else if (e.keyCode == '39') { stepRight(); }
+
     snakeBody = x.concat(snakeBody);
     displaySnakeHead();
     displaySnakeBody();
     eatApple();
     gameEnd();
-}
-
-function initialSnakeBodyPosition() {
-    let a;
-    let b;
-    a = Array.from(document.getElementsByClassName(snakeHead -1));
-    b = Array.from(document.getElementsByClassName(snakeHead -2));
-    snakeBody = a.concat(b);
 }
 
 function displaySnakeBody() {
@@ -109,16 +117,31 @@ function gameEnd() {
     }
 }
 
+// function step(d) {
+//     let intervalID = setTimeout(() => { 
+//         clearHead();
+//         clearBody();
+//         endOfTail = snakeBody.pop();
+
+//         if (d == "up") { stepUp(); }
+//         else if (d == "down") { stepDown(); }
+//         else if (d == "left") { stepLeft(); }
+//         else if (d == "right") { stepRight(); }
+
+//         snakeBody = x.concat(snakeBody);
+//         displaySnakeHead();
+//         displaySnakeBody();
+//         eatApple();
+//         gameEnd();
+//      }, 1000);
+// }
+
 function init() {
-    // buildSnake(snakeStartSize);
-    // console.log(snakeBody);
     displaySnakeHead();
-    initialSnakeBodyPosition();
     displaySnakeBody();
     keyPress();
-  
-    
     displayApple();
+ //   step(direction);
 }
   
 window.addEventListener('DOMContentLoaded', init);
