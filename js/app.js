@@ -2,6 +2,7 @@ let snakeStartSize = 3;
 let snakeBody = new Array();
 let snakeHead = Math.floor(Math.random() * 100) + 1 ;
 let x;
+let endOfTail;
 
 // Use getElementsByClassName to find elements as HTMLcollection, then turn into array so we can use forEach to add a new class
 function displaySnakeHead() {
@@ -20,7 +21,8 @@ function clearHead() {
 function logKey(e) {
     clearHead();
     clearBody();
-    snakeBody.pop();
+    endOfTail = snakeBody.pop();
+     
     // Up
     if (e.keyCode == '38') {
         snakeHead -= 10;
@@ -91,6 +93,7 @@ function eatApple() {
     a = Array.from(document.getElementsByClassName('snakehead apple'));
     if (a.length > 0) {
         a.forEach(element => element.classList.remove('apple'));
+        snakeBody.push(endOfTail);
         displayApple();
     }
 }
@@ -99,9 +102,11 @@ function init() {
     // buildSnake(snakeStartSize);
     // console.log(snakeBody);
     displaySnakeHead();
-    keyPress();
     initialSnakeBodyPosition();
     displaySnakeBody();
+    keyPress();
+  
+    
     displayApple();
 }
   
