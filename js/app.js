@@ -55,6 +55,7 @@ function logKey(e) {
     displaySnakeHead();
     displaySnakeBody();
     eatApple();
+    gameEnd();
 }
 
 function initialSnakeBodyPosition() {
@@ -79,9 +80,11 @@ function displayApple() {
     a = Array.from(document.getElementsByClassName(applePosition));
     a.forEach((apple) => {
         if (apple.classList.contains('snakehead')) {
+            a = [];
             displayApple();
         }
         else if (apple.classList.contains('snakebody')) {
+            a = [];
             displayApple();
         }
     })
@@ -95,6 +98,14 @@ function eatApple() {
         a.forEach(element => element.classList.remove('apple'));
         snakeBody.push(endOfTail);
         displayApple();
+    }
+}
+
+function gameEnd() {
+    let a
+    a = Array.from(document.getElementsByClassName('snakehead snakebody'));
+    if (a.length > 0) {
+        console.log('You have lost the game!')
     }
 }
 

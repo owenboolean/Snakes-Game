@@ -26,9 +26,7 @@ h1 {
     background-color: cadetblue;
     float: left;
 }
-.apple {
-    background-color: red;
-}
+
 
 .snakebody {
     background-color: green;
@@ -37,5 +35,7 @@ h1 {
 .snakehead {
     background-color: greenyellow;
 }
-
+.apple {
+    background-color: red;
+}
 
