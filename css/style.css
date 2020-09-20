@@ -26,11 +26,16 @@ h1 {
     background-color: cadetblue;
     float: left;
 }
-
-.snakehead {
+.apple {
     background-color: red;
 }
 
 .snakebody {
     background-color: green;
 }
+
+.snakehead {
+    background-color: greenyellow;
+}
+
+

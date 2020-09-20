@@ -54,7 +54,7 @@ function logKey(e) {
     displaySnakeBody();
 }
 
-function InitialSnakeBodyPosition() {
+function initialSnakeBodyPosition() {
     let a;
     let b;
     a = Array.from(document.getElementsByClassName(snakeHead -1));
@@ -69,13 +69,29 @@ function clearBody() {
     snakeBody.forEach(element => element.classList.remove('snakebody'));
 }
 
+function displayApple() {
+    let a;
+    applePosition = Math.floor(Math.random() * 100) + 1;
+    a = Array.from(document.getElementsByClassName(applePosition));
+    a.forEach((apple) => {
+        if (apple.classList.contains('snakehead')) {
+            displayApple();
+        }
+        else if (apple.classList.contains('snakebody')) {
+            displayApple();
+        }
+    })
+    a.forEach(element => element.classList.add('apple'));
+}
+
 function init() {
     // buildSnake(snakeStartSize);
     // console.log(snakeBody);
     displaySnakeHead();
     keyPress();
-    InitialSnakeBodyPosition();
+    initialSnakeBodyPosition();
     displaySnakeBody();
+    displayApple();
 }
   
 window.addEventListener('DOMContentLoaded', init);
