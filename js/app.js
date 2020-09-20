@@ -52,6 +52,7 @@ function logKey(e) {
     snakeBody = x.concat(snakeBody);
     displaySnakeHead();
     displaySnakeBody();
+    eatApple();
 }
 
 function initialSnakeBodyPosition() {
@@ -69,6 +70,7 @@ function clearBody() {
     snakeBody.forEach(element => element.classList.remove('snakebody'));
 }
 
+// Generate random position for apple using recusion to loop if apple is in the same position as the snake
 function displayApple() {
     let a;
     applePosition = Math.floor(Math.random() * 100) + 1;
@@ -82,6 +84,15 @@ function displayApple() {
         }
     })
     a.forEach(element => element.classList.add('apple'));
+}
+
+function eatApple() {
+    let a
+    a = Array.from(document.getElementsByClassName('snakehead apple'));
+    if (a.length > 0) {
+        a.forEach(element => element.classList.remove('apple'));
+        displayApple();
+    }
 }
 
 function init() {
