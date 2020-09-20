@@ -13,12 +13,14 @@ function keyPress() {
     document.onkeydown = logKey;
 }
 
-function clearBox() {
+function clearHead() {
     x.forEach(element => element.classList.remove('snakehead'));
 }
 
 function logKey(e) {
-    clearBox();
+    clearHead();
+    clearBody();
+    snakeBody.pop();
     // Up
     if (e.keyCode == '38') {
         snakeHead -= 10;
@@ -47,7 +49,24 @@ function logKey(e) {
            snakeHead -= 10;
       }
     }
+    snakeBody = x.concat(snakeBody);
     displaySnakeHead();
+    displaySnakeBody();
+}
+
+function InitialSnakeBodyPosition() {
+    let a;
+    let b;
+    a = Array.from(document.getElementsByClassName(snakeHead -1));
+    b = Array.from(document.getElementsByClassName(snakeHead -2));
+    snakeBody = a.concat(b);
+}
+
+function displaySnakeBody() {
+    snakeBody.forEach(element => element.classList.add('snakebody'));
+}
+function clearBody() {
+    snakeBody.forEach(element => element.classList.remove('snakebody'));
 }
 
 function init() {
@@ -55,6 +74,8 @@ function init() {
     // console.log(snakeBody);
     displaySnakeHead();
     keyPress();
+    InitialSnakeBodyPosition();
+    displaySnakeBody();
 }
   
 window.addEventListener('DOMContentLoaded', init);
