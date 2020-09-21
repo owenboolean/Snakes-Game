@@ -4,6 +4,7 @@ let snakeHead = Math.floor(Math.random() * 100) + 1 ;
 let x;
 let endOfTail;
 let direction;
+let score;
 
 // Use getElementsByClassName to find elements as HTMLcollection, then turn into array so we can use forEach to add a new class
 function displaySnakeHead() {
@@ -113,15 +114,15 @@ function eatApple() {
 
 function gameEnd() {
     let a
+    score = snakeBody.length - 2;
     a = Array.from(document.getElementsByClassName('snakehead snakebody'));
     if (a.length > 0) {
-        console.log('You have lost the game!')
+        console.log('You have finished the game! Your final score is ' + score)
     }
 }
 
 function step() {
     let intervalID = setInterval(() => { 
-        console.log("test");
         clearHead();
         clearBody();
         popSnakeBody()
