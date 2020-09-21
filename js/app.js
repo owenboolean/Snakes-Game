@@ -120,12 +120,11 @@ function gameEnd() {
 }
 
 function step() {
-    let intervalID 
-    intervalID = setInterval(() => { 
+    let intervalID = setInterval(() => { 
         console.log("test");
         clearHead();
         clearBody();
-        endOfTail = snakeBody.pop();
+        popSnakeBody()
 
         if (direction == "up") { stepUp(); }
         else if (direction == "down") { stepDown(); }
@@ -134,9 +133,10 @@ function step() {
 
         snakeBody = x.concat(snakeBody);
         displaySnakeHead();
+        gameEnd();
         displaySnakeBody();
         eatApple();
-        gameEnd();
+        
      }, 1000);
 }
 
