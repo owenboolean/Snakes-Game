@@ -138,7 +138,16 @@ function step() {
      }, speed);
 }
 
+// Create 100 cells for our grid
+function createGrid() {
+    let container = document.getElementById("grid");
+    for (var i = 1; i < 101; i++) {
+        container.innerHTML += '<div class="cell ' + i + '"></div>';
+    }
+}
+
 function init() {
+    createGrid();
     displaySnakeHead();
     displaySnakeBody();
     keyPress();

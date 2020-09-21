@@ -10,7 +10,7 @@ h1 {
     text-align: center;
 }
 
-.grid {
+#grid {
     margin: auto;
     border: 1px solid #ddd;
     width: 502px;
