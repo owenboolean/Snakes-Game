@@ -4,7 +4,7 @@ let snakeHeadPosition = Math.floor(Math.random() * 100) + 1 ;
 let snakeHead = new Array();
 let endOfTail;
 let direction;
-let score;
+let score
 let speed = 1000;
 let intervalID;
 
@@ -114,7 +114,6 @@ function eatApple() {
         snakeBody.push(endOfTail);
         displayApple();
         speed -= 50;
-        console.log(speed);
         clearInterval(intervalID);
         step();
     }
@@ -126,6 +125,7 @@ function gameEnd() {
     a = Array.from(document.getElementsByClassName('snakehead snakebody'));
     if (a.length > 0) {
         console.log('You have finished the game! Your final score is ' + score)
+        clearInterval(intervalID);
     }
 }
 // Keeps the snake moving at intervals, looking for when we eat apples or crash into body
