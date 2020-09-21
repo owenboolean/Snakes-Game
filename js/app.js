@@ -1,65 +1,67 @@
-let snakeStartSize = 3;
+let snakeBodyStartSize = 2;
 let snakeBody = new Array();
-let snakeHead = Math.floor(Math.random() * 100) + 1 ;
-let x;
+let snakeHeadPosition = Math.floor(Math.random() * 100) + 1 ;
+let snakeHead = new Array();
 let endOfTail;
 let direction;
 let score;
 
-// Use getElementsByClassName to find elements as HTMLcollection, then turn into array so we can use forEach to add a new class
+// Use getElementsByClassName to find elements as HTMLcollection, then turn into array
 function displaySnakeHead() {
-    // console.log("first" + snakeHead);
-    // snakeBody.forEach(element => console.log(element));
-    x = Array.from(document.getElementsByClassName(snakeHead));
-    x.forEach(element => element.classList.add('snakehead'));
+    snakeHead = Array.from(document.getElementsByClassName(snakeHeadPosition));
+    snakeHead.forEach(element => element.classList.add('snakehead'));
 }
 
+// Listen for arrow key press
 function keyPress() {
     document.onkeydown = logKey;
 }
 
+// Clear snake head
 function clearHead() {
-    x.forEach(element => element.classList.remove('snakehead'));
+    snakeHead.forEach(element => element.classList.remove('snakehead'));
 }
 
+// Find position for up direction with wrap around
 function stepUp() {
     direction = "up";
-    snakeHead -= 10;
-    if (snakeHead < 1) {
-        snakeHead += 100;
+    snakeHeadPosition -= 10;
+    if (snakeHeadPosition < 1) {
+        snakeHeadPosition += 100;
     }
 }
-
+// Find position for down direction with wrap around
 function stepDown() {
     direction = "down";
-    snakeHead += 10;
-    if (snakeHead > 100) {
-        snakeHead -= 100;
+    snakeHeadPosition += 10;
+    if (snakeHeadPosition > 100) {
+        snakeHeadPosition -= 100;
     }
 }
-
+// Find position for left direction with wrap around
 function stepLeft() {
     direction = "left";
-    snakeHead -= 1;
-    if (snakeHead % 10 == 0) {
-        snakeHead += 10;
+    snakeHeadPosition -= 1;
+    if (snakeHeadPosition % 10 == 0) {
+        snakeHeadPosition += 10;
     }
 }
-
+// Find position for right direction with wrap around
 function stepRight() {
     direction = "right";
-    snakeHead += 1;
-    if (snakeHead % 10 == 1) {
-        snakeHead -= 10;
+    snakeHeadPosition += 1;
+    if (snakeHeadPosition % 10 == 1) {
+        snakeHeadPosition -= 10;
    }
 }
-
+// Pops of tail to simulate movement
 function popSnakeBody() {
-    if (snakeBody.length > 1) {
+    if (snakeBody.length >= snakeBodyStartSize) {
     endOfTail = snakeBody.pop();
     }
 }
-
+// When key stroke pressed this clears the snake then finds new position of snake
+// displays new position of snake then checks if we eat apple or crash into body
 function logKey(e) {
     clearHead();
     clearBody();
@@ -70,7 +72,7 @@ function logKey(e) {
     else if (e.keyCode == '37') { stepLeft(); }
     else if (e.keyCode == '39') { stepRight(); }
 
-    snakeBody = x.concat(snakeBody);
+    snakeBody = snakeHead.concat(snakeBody);
     displaySnakeHead();
     displaySnakeBody();
     eatApple();
@@ -101,7 +103,7 @@ function displayApple() {
     })
     a.forEach(element => element.classList.add('apple'));
 }
-
+// Checks if we eat apple
 function eatApple() {
     let a
     a = Array.from(document.getElementsByClassName('snakehead apple'));
@@ -111,7 +113,7 @@ function eatApple() {
         displayApple();
     }
 }
-
+// Checks if we crash into snakebody and displays score
 function gameEnd() {
     let a
     score = snakeBody.length - 2;
@@ -120,7 +122,7 @@ function gameEnd() {
         console.log('You have finished the game! Your final score is ' + score)
     }
 }
-
+// Keeps the snake moving at intervals, looking for when we eat apples or crash into body
 function step() {
     let intervalID = setInterval(() => { 
         clearHead();
@@ -132,7 +134,7 @@ function step() {
         else if (direction == "left") { stepLeft(); }
         else if (direction == "right") { stepRight(); }
 
-        snakeBody = x.concat(snakeBody);
+        snakeBody = snakeHead.concat(snakeBody);
         displaySnakeHead();
         gameEnd();
         displaySnakeBody();
