@@ -7,6 +7,8 @@ let direction;
 
 // Use getElementsByClassName to find elements as HTMLcollection, then turn into array so we can use forEach to add a new class
 function displaySnakeHead() {
+    // console.log("first" + snakeHead);
+    // snakeBody.forEach(element => console.log(element));
     x = Array.from(document.getElementsByClassName(snakeHead));
     x.forEach(element => element.classList.add('snakehead'));
 }
@@ -117,31 +119,33 @@ function gameEnd() {
     }
 }
 
-// function step(d) {
-//     let intervalID = setTimeout(() => { 
-//         clearHead();
-//         clearBody();
-//         endOfTail = snakeBody.pop();
+function step() {
+    let intervalID 
+    intervalID = setInterval(() => { 
+        console.log("test");
+        clearHead();
+        clearBody();
+        endOfTail = snakeBody.pop();
 
-//         if (d == "up") { stepUp(); }
-//         else if (d == "down") { stepDown(); }
-//         else if (d == "left") { stepLeft(); }
-//         else if (d == "right") { stepRight(); }
+        if (direction == "up") { stepUp(); }
+        else if (direction == "down") { stepDown(); }
+        else if (direction == "left") { stepLeft(); }
+        else if (direction == "right") { stepRight(); }
 
-//         snakeBody = x.concat(snakeBody);
-//         displaySnakeHead();
-//         displaySnakeBody();
-//         eatApple();
-//         gameEnd();
-//      }, 1000);
-// }
+        snakeBody = x.concat(snakeBody);
+        displaySnakeHead();
+        displaySnakeBody();
+        eatApple();
+        gameEnd();
+     }, 1000);
+}
 
 function init() {
     displaySnakeHead();
     displaySnakeBody();
     keyPress();
     displayApple();
- //   step(direction);
+    step();
 }
   
 window.addEventListener('DOMContentLoaded', init);
