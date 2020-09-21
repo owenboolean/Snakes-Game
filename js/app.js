@@ -28,39 +28,29 @@ function clearHead() {
 function stepUp() {
     direction = "up";
     snakeHeadPosition -= 10;
-    if (snakeHeadPosition < 1) {
-        snakeHeadPosition += 100;
-    }
+    if (snakeHeadPosition < 1) { snakeHeadPosition += 100; }
 }
 // Find position for down direction with wrap around
 function stepDown() {
     direction = "down";
     snakeHeadPosition += 10;
-    if (snakeHeadPosition > 100) {
-        snakeHeadPosition -= 100;
-    }
+    if (snakeHeadPosition > 100) { snakeHeadPosition -= 100; }
 }
 // Find position for left direction with wrap around
 function stepLeft() {
     direction = "left";
     snakeHeadPosition -= 1;
-    if (snakeHeadPosition % 10 == 0) {
-        snakeHeadPosition += 10;
-    }
+    if (snakeHeadPosition % 10 == 0) { snakeHeadPosition += 10; }
 }
 // Find position for right direction with wrap around
 function stepRight() {
     direction = "right";
     snakeHeadPosition += 1;
-    if (snakeHeadPosition % 10 == 1) {
-        snakeHeadPosition -= 10;
-   }
+    if (snakeHeadPosition % 10 == 1) { snakeHeadPosition -= 10; }
 }
 // Pops of tail to simulate movement
 function popSnakeBody() {
-    if (snakeBody.length >= snakeBodyStartSize) {
-    endOfTail = snakeBody.pop();
-    }
+    if (snakeBody.length >= snakeBodyStartSize) { endOfTail = snakeBody.pop(); }
 }
 // When key stroke pressed this clears the snake then finds new position of snake
 // displays new position of snake then checks if we eat apple or crash into body
@@ -90,9 +80,8 @@ function clearBody() {
 
 // Generate random position for apple using recusion to loop if apple is in the same position as the snake
 function displayApple() {
-    let a;
     applePosition = Math.floor(Math.random() * 100) + 1;
-    a = Array.from(document.getElementsByClassName(applePosition));
+    let a = Array.from(document.getElementsByClassName(applePosition));
     a.forEach((apple) => {
         if (apple.classList.contains('snakehead')) {
             a = [];
@@ -107,8 +96,7 @@ function displayApple() {
 }
 // Checks if we eat apple
 function eatApple() {
-    let a
-    a = Array.from(document.getElementsByClassName('snakehead apple'));
+    let a = Array.from(document.getElementsByClassName('snakehead apple'));
     if (a.length > 0) {
         a.forEach(element => element.classList.remove('apple'));
         snakeBody.push(endOfTail);
@@ -120,9 +108,8 @@ function eatApple() {
 }
 // Checks if we crash into snakebody and displays score and play again button
 function gameEnd() {
-    let a
     score = snakeBody.length - 2;
-    a = Array.from(document.getElementsByClassName('snakehead snakebody'));
+    let a = Array.from(document.getElementsByClassName('snakehead snakebody'));
     if (a.length > 0) {
         console.log('You have finished the game! Your final score is ' + score)
         clearInterval(intervalID);
