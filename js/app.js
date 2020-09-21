@@ -5,6 +5,8 @@ let snakeHead = new Array();
 let endOfTail;
 let direction;
 let score;
+let speed = 1000;
+let intervalID;
 
 // Use getElementsByClassName to find elements as HTMLcollection, then turn into array
 function displaySnakeHead() {
@@ -111,6 +113,10 @@ function eatApple() {
         a.forEach(element => element.classList.remove('apple'));
         snakeBody.push(endOfTail);
         displayApple();
+        speed -= 50;
+        console.log(speed);
+        clearInterval(intervalID);
+        step();
     }
 }
 // Checks if we crash into snakebody and displays score
@@ -124,7 +130,7 @@ function gameEnd() {
 }
 // Keeps the snake moving at intervals, looking for when we eat apples or crash into body
 function step() {
-    let intervalID = setInterval(() => { 
+        intervalID = setInterval(() => { 
         clearHead();
         clearBody();
         popSnakeBody()
@@ -140,7 +146,7 @@ function step() {
         displaySnakeBody();
         eatApple();
         
-     }, 1000);
+     }, speed);
 }
 
 function init() {
