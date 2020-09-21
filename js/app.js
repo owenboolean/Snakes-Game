@@ -118,7 +118,7 @@ function eatApple() {
         step();
     }
 }
-// Checks if we crash into snakebody and displays score
+// Checks if we crash into snakebody and displays score and play again button
 function gameEnd() {
     let a
     score = snakeBody.length - 2;
@@ -126,9 +126,10 @@ function gameEnd() {
     if (a.length > 0) {
         console.log('You have finished the game! Your final score is ' + score)
         clearInterval(intervalID);
-        document.getElementById('end-game-message').innerHTML = '<span>Thanks for playing Snakes! Your final score is ' + score + '.</span>';
+        document.getElementById('end-game-message').innerHTML = '<button onClick="window.location.reload();">Thanks for playing Snakes! Your final score is ' + score + '. Click here to play again.</button>';
     }
 }
+
 // Keeps the snake moving at intervals, looking for when we eat apples or crash into body
 function step() {
         intervalID = setInterval(() => { 
